@@ -41,6 +41,8 @@ Bubblewrap akan membuat kunci tanda tangan saat inisialisasi. Simpan berkas `.ke
 
 `com.nurhafit.ace` adalah nama paket contoh. Kalau mau menggantinya, ubah `packageName` di `twa-manifest.json` sebelum build, lalu sesuaikan juga saat inisialisasi.
 
+Setelah build pertama, salin sidik jari sertifikat dari keluaran Bubblewrap ke `assetlinks-template.json`. Simpan hasilnya sebagai `.well-known/assetlinks.json` di akar situs dan deploy ulang. Panduan lengkap ada di `../CLOUDFLARE.md`.
+
 ## Isi twa-manifest.json
 
 Berkas ini dipakai sebagai rujukan nilai warna, nama, dan identitas aplikasi. Nilai `REPLACE_WITH_YOUR_HTTPS_HOST` sengaja dibiarkan karena saya tidak mengarang alamat hosting. Isi dengan alamat aslimu setelah deploy.

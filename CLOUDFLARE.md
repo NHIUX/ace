@@ -58,6 +58,18 @@ Setelah alamat HTTPS aktif:
 
 Skrip memakai `npx --yes @bubblewrap/cli`. Node.js sudah dipasang di mesin ini. JDK 17 dan Android SDK juga sedang dipasang atau disiapkan.
 
+## 6. Pasang Asset Links setelah APK pertama
+
+Bubblewrap akan mencetak sidik jari sertifikat berbentuk `SHA-256` setelah build pertama. Sidik jari itu bukan rahasia, tetapi belum ada sampai kunci tanda tangan dibuat.
+
+1. Salin sidik jari dari keluaran build.
+2. Buka `android/assetlinks-template.json`.
+3. Ganti `REPLACE_WITH_SHA256_FINGERPRINT` dengan sidik jari asli.
+4. Simpan berkas itu sebagai `.well-known/assetlinks.json` di akar repository.
+5. Commit dan push supaya Cloudflare Pages menerbitkan ulang situs.
+
+Tanpa langkah ini, APK tetap bisa dipasang tetapi bisa tampil dengan bilah alamat browser. Setelah `assetlinks.json` aktif, TWA tampil sebagai aplikasi penuh.
+
 ## Catatan open source
 
 Kalau repo publik, siapa pun bisa membaca kode dan memakai ulang desainnya. Itu sesuai arah open source friendly. Kunci API tidak pernah tersimpan di repository. Data pengguna tetap berada di `localStorage` perangkat masing-masing.
