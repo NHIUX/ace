@@ -1,4 +1,4 @@
-import { SLOP_PATTERNS, BUZZWORDS, GENERIC_CTA, FILLER, BUZZWORD_REPLACEMENTS } from "./data.js";
+import { SLOP_PATTERNS, BUZZWORDS, GENERIC_CTA, FILLER, ABSOLUTE_CLAIMS, VAGUE_WORDS, BUZZWORD_REPLACEMENTS } from "./data.js";
 
 function escapeRegExp(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -74,6 +74,18 @@ export function analyzeSlop(text) {
   for (const match of findAll(source, /\p{Extended_Pictographic}/gu)) add("emoji", match, "Emoji di teks UI bersaing dengan pesan utama.");
 
   for (const match of findAll(source, /!{2,}/g)) add("exclamation", match, "Tanda seru berulang terasa seperti iklan.");
+
+  for (const term of ABSOLUTE_CLAIMS) {
+    for (const match of findAll(source, new RegExp(`\\b${escapeRegExp(term)}\\b`, "gi"))) {
+      add("absolute", match, `"${term}" perlu dibatasi atau dibuktikan.`);
+    }
+  }
+
+  for (const term of VAGUE_WORDS) {
+    for (const match of findAll(source, new RegExp(`\\b${escapeRegExp(term)}\\b`, "gi"))) {
+      add("vague", match, `"${term}" belum menyebut tindakan atau kondisi yang jelas.`);
+    }
+  }
 
   for (const sentence of source.split(/[.!?]+/)) {
     const trimmed = sentence.trim();

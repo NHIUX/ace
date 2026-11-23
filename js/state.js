@@ -38,14 +38,19 @@ function defaults() {
     writer: { synopsis: "", characters: "", chapters: [], targetWords: null },
     customPrompts: [],
     slopDraft: "",
+    tools: { inputs: {}, results: {}, prompts: {}, answers: {} },
     settings: {
       theme: "paper",
+      railCollapsed: false,
+      activeRole: "ux",
+      activeCapability: "ux-research",
       model: {
         preset: preset.id,
         endpoint: preset.endpoint,
         model: preset.model,
         format: preset.format,
         apiKey: "",
+        directory: "",
       },
     },
   };

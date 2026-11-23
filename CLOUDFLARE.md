@@ -56,7 +56,7 @@ Setelah alamat HTTPS aktif:
 3. Jalankan `android/build-apk.bat` dari folder `android`.
 4. Masukkan host yang sama ketika skrip bertanya.
 
-Skrip memakai `npx --yes @bubblewrap/cli`. Node.js sudah dipasang di mesin ini. JDK 17 dan Android SDK juga sedang dipasang atau disiapkan.
+Skrip memakai `npx --yes @bubblewrap/cli`. Toolchain sudah siap: Node.js 26.13.1 ada di `C:\Program Files\nodejs`, JDK 17.0.3 ada di `C:\Program Files\ojdkbuild`, dan Android SDK command line tools ada di `%LOCALAPPDATA%\Android\Sdk\cmdline-tools\latest`. Skrip `build-apk.bat` akan memasang platform Android 35, build-tools 35.0.0, dan platform-tools bila belum ada. Build biner tetap belum dijalankan sampai host HTTPS asli tersedia.
 
 ## 6. Pasang Asset Links setelah APK pertama
 
@@ -74,4 +74,4 @@ Tanpa langkah ini, APK tetap bisa dipasang tetapi bisa tampil dengan bilah alama
 
 Kalau repo publik, siapa pun bisa membaca kode dan memakai ulang desainnya. Itu sesuai arah open source friendly. Kunci API tidak pernah tersimpan di repository. Data pengguna tetap berada di `localStorage` perangkat masing-masing.
 
-Monetisasi tidak diotomatisasi di sini. Yang bisa kamu jual adalah paket prompt, template, jasa desain atau copywriting, afiliasi alat yang memang kamu pakai, atau sponsorship. Tidak ada klaim pendapatan di aplikasi maupun dokumentasi.
+Monetisasi tidak diotomatisasi di sini. Yang bisa kamu jual adalah paket prompt, template, jasa desain atau penulisan naskah, afiliasi alat yang memang kamu pakai, atau sponsor. Tidak ada klaim pendapatan di aplikasi maupun dokumentasi.

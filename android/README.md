@@ -2,7 +2,7 @@
 
 Folder ini bukan APK jadi. Isinya adalah konfigurasi dan skrip untuk menghasilkan APK dari PWA setelah aplikasi dipublikasikan ke alamat HTTPS.
 
-Mesin ini awalnya tidak punya Java, Node.js, atau Android SDK. Toolchain sedang saya siapkan sesuai pilihanmu untuk membuat APK biner. Sampai build benar-benar dijalankan dan menghasilkan berkas, jangan mengira `twa-manifest.json` atau `build-apk.bat` adalah aplikasi yang bisa langsung dikirim ke HP.
+Toolchain sudah disiapkan: Node.js 26.13.1, JDK 17.0.3, dan Android SDK command line tools di `%LOCALAPPDATA%\Android\Sdk\cmdline-tools\latest`. Build biner belum dijalankan karena masih menunggu host HTTPS aktif. Sampai build benar-benar menghasilkan berkas, jangan mengira `twa-manifest.json` atau `build-apk.bat` adalah aplikasi yang bisa langsung dikirim ke HP.
 
 ## Cara paling mudah tanpa APK
 
@@ -12,7 +12,7 @@ Kalau tujuanmu hanya memakai ACE di HP sendiri, lebih praktis memakai install PW
 2. Buka alamat itu di Chrome Android.
 3. Menu Chrome, pilih Add to Home screen atau Install app.
 
-Hasilnya tampil seperti aplikasi biasa dan bisa dipakai offline. Ini tidak butuh JDK, SDK, atau Play Store.
+Hasilnya tampil seperti aplikasi biasa dan bisa dipakai tanpa internet setelah cache terisi. Ini tidak butuh JDK, SDK, atau Play Store.
 
 ## Cara menghasilkan APK
 

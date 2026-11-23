@@ -1,4 +1,4 @@
-const CACHE = "ace-v2-2";
+const CACHE = "ace-v2-4";
 const SHELL = [
   "./",
   "./index.html",
@@ -7,6 +7,7 @@ const SHELL = [
   "./js/app.js",
   "./js/data.js",
   "./js/analyzers.js",
+  "./js/tools.js",
   "./js/state.js",
   "./icons/icon.svg",
   "./icons/icon-192.png",

@@ -7,8 +7,8 @@ Arah diambil dari permintaan pengguna: minimalis, siap pakai, dan bertumpu pada 
 ## Identitas
 
 - Nama: ACE. Nama sebelumnya Antigravity Studio sudah diganti di seluruh antarmuka, manifest, judul halaman, berkas ekspor, dan dokumentasi.
-- Motif: mahkota Ratu pada pion catur, digambar ulang secara geometris. Dipakai di header dan ikon PWA. Alasannya supaya aplikasi punya tanda yang jelas dan tidak memakai simbol AI generik.
-- Suara: langsung, ramah, tanpa klaim. Kalimat pendek, kata kerja spesifik, tidak ada buzzword.
+- Motif: mahkota Ratu pada pion catur, digambar ulang secara geometris. Dipakai di header dan ikon PWA. Tombol Ratu di header berfungsi sebagai sakelar lebar navigasi, bukan sekadar hiasan.
+- Suara: langsung, ramah, tanpa klaim. Kalimat pendek, kata kerja spesifik, tidak ada kata jargon. Nama bidang kerja sengaja memakai sebutan bidang yang diminta pengguna, misalnya UI/UX Designer dan Content Planner.
 
 ## Warna
 
@@ -35,39 +35,44 @@ Batasan warna dipatuhi: dua warna netral inti, satu aksen, sisanya turunan netra
 
 ## Tata letak
 
-- Desktop: header penuh setinggi 78px, rel kiri 240px untuk delapan modul, area kerja di kanan.
+- Desktop: header penuh setinggi 78px, rel kiri 252px yang berisi sembilan bidang kerja dan tujuh alat pendukung, area kerja di kanan.
+- Klik Ratu mengecilkan rel menjadi 76px. Teks dan judul grup disembunyikan, ikon tetap tertata, dan label muncul saat kursor di atasnya atau saat fokus. Keadaan ini tersimpan di `ace-v2`.
 - Area kerja memakai lebar maksimal 1180px dan margin tengah. Panel memakai padding 26px, radius 12px, dan garis 1px.
 - Jarak antar panel memakai skala tetap: 6, 10, 14, 20, 26, dan 34px. White space diatur lewat skala ini, bukan angka acak per komponen.
-- Layar 960px ke bawah: rel disembunyikan, navigasi bawah lima tombol muncul, header melekat di atas.
-- Layar 620px ke bawah: kolom penuh, panel padding 20px 16px, tombol dalam baris menjadi lebar penuh, kalender minggu menjadi satu kolom.
+- Layar 960px ke bawah: rel disembunyikan, navigasi bawah lima tombol muncul, header melekat di atas. Tombol Ratu membuka dialog berisi sembilan peran dan tujuh alat.
+- Layar 620px ke bawah: kolom penuh, panel padding 20px 16px, tombol dalam baris menjadi lebar penuh, kalender minggu menjadi satu kolom, workbench menjadi satu kolom.
 - Kartu dipakai hanya untuk mengelompokkan isi yang benar-benar terpisah. Tidak ada bento grid, tidak ada hero, tidak ada bagian yang hanya mengisi template.
-- Satu titik fokus per layar. Di Beranda, fokus berjalan berada di kartu dengan garis aksen. Di modul lain, judul panel pertama menjadi fokus.
+- Satu titik fokus per layar. Di Beranda, fokus berjalan berada di kartu dengan garis aksen. Di peran, kartu kapabilitas yang dipilih dan workbench menjadi fokus.
 
 RHYTHM 2 diwujudkan oleh pola yang konsisten, dengan beberapa penyimpangan yang disengaja: kartu fokus, kalender minggu tujuh kolom di layar lebar, dan swatch palet.
 
 ## Gerak
 
-MOTION 1. Tidak ada animasi masuk, scroll reveal, parallax, atau elemen mengambang. Satu-satunya gerak adalah perubahan warna saat hover dan geser 1px saat tombol ditekan. Itu pun dimatikan kalau sistem meminta pengurangan gerak. Tidak ada gerak lebih dari 5 detik.
+MOTION 1. Tidak ada animasi masuk, efek muncul saat gulir atau pergeseran latar, dan elemen mengambang. Satu-satunya gerak adalah perubahan warna saat kursor di atasnya dan geser 1px saat tombol ditekan. Itu pun dimatikan kalau sistem meminta pengurangan gerak. Tidak ada gerak lebih dari 5 detik.
 
 ## Komponen dan alasan
 
-- Tombol minimal 44px tinggi, termasuk dua tombol sakelar tema. Sumber aturan ini adalah kebutuhan pemakaian di Android.
-- Sakelar tema memakai dua ikon, matahari untuk terang dan bulan untuk gelap. Tiap tombol punya `aria-label` dan `aria-pressed`. Tidak ada teks "Terang" atau "Gelap" di header.
+- Tombol minimal 44px tinggi, termasuk dua tombol sakelar tema dan tombol Ratu. Sumber aturan ini adalah kebutuhan pemakaian di Android.
+- Sakelar tema memakai dua ikon, matahari untuk terang dan bulan untuk gelap. Tiap tombol punya `aria-label` dan `aria-pressed`. Keterangan "Tampilan" ditampilkan di desktop dan disembunyikan di layar sempit.
+- Tombol rel memakai nama dari teks yang terlihat ketika rel penuh. Saat rel ringkas, teks disembunyikan dan `aria-label` dipasang supaya pembaca layar tetap mendapat nama. Ini menghindari nama aksesibel yang tidak cocok dengan teks terlihat.
 - Fokus keyboard memakai outline 3px berwarna aksen dengan offset 3px. Tidak ada penghapusan outline.
 - Panel memakai garis 1px, bukan bayangan. Bayangan hanya dipakai sekali di kartu fokus untuk menandakan prioritas.
-- Badge dipakai untuk status nyata: peran aktif, hasil kontras, tingkat temuan. Tidak ada badge "AI Powered" atau "New".
-- Empty state memakai garis putus-putus dan kalimat yang menyebut tindakan berikutnya.
-- Status bar muncul saat ada notifikasi dan hilang sendiri untuk pesan sukses. Pesan error tetap tampil sampai kondisi berubah.
+- Kartu kapabilitas memakai ikon, nama fungsi, ringkasan, dan keluaran. Kartu aktif diberi garis aksen dan garis atas aksen.
+- Workbench memisahkan bahan kerja dan alat lokal di satu kolom, serta prompt dan jawaban AI di kolom lain. Pemisahan ini menegaskan mana yang offline dan mana yang butuh koneksi.
+- Penanda dipakai untuk status nyata: peran aktif, jumlah alat, hasil kontras, tingkat temuan. Tidak ada penanda "AI Powered" atau "New".
+- Keadaan kosong memakai garis putus-putus dan kalimat yang menyebut tindakan berikutnya.
+- Bilah status muncul saat ada notifikasi dan hilang sendiri untuk pesan sukses. Pesan galat tetap tampil sampai kondisi berubah.
 - Dialog ruang kerja bisa ditutup dengan tombol Tutup, klik di luar, atau Escape.
 
 ## Keadaan dan ketahanan
 
-- Kosong: daftar fokus, checklist, jadwal, bab, potongan kode, dan hasil pemeriksaan punya teks kosong sendiri.
+- Kosong: daftar fokus, langkah, jadwal, bab, potongan kode, hasil alat, dan jawaban AI punya teks kosong sendiri.
 - Memuat: tombol kirim ke model menampilkan "Mengirim..." dan dinonaktifkan. Ini satu-satunya proses yang menunggu jaringan.
-- Error: pengiriman model, impor gagal, dan penyimpanan gagal memunculkan pesan di status bar. Halaman tidak kosong karena alat lokal tetap tersedia.
+- Galat: pengiriman model, impor gagal, dan penyimpanan gagal memunculkan pesan di bilah status. Halaman tidak kosong karena alat lokal tetap tersedia.
 - Tema: dua tema memakai variabel yang sama. Tidak ada gaya yang hanya berlaku di satu tema kecuali warna tombol utama, yang disesuaikan agar teks tetap terbaca.
 - Keyboard: semua kontrol berupa elemen native. Dialog memakai `dialog` sehingga Escape berfungsi tanpa kode tambahan.
-- Penyimpanan: kunci utama `ace-v2`. Data lama dengan kunci `antigravity-studio-v2` dipindahkan otomatis sekali saat aplikasi dibuka.
+- Penyimpanan: kunci utama `ace-v2`, versi data `2`. Data lama dengan kunci `antigravity-studio-v2` dipindahkan otomatis sekali saat aplikasi dibuka. Peran aktif, kapabilitas aktif, hasil alat, prompt, dan jawaban ikut tersimpan.
+- AI: OpenCode dipakai sebagai agent utama lewat HTTP API. Koneksi ke penyedia lain bersifat opsional dan manual. Tidak ada permintaan otomatis saat halaman dibuka.
 
 ## Ikon
 
@@ -79,61 +84,55 @@ MOTION 1. Tidak ada animasi masuk, scroll reveal, parallax, atau elemen mengamba
 - Kenapa Poppins di semua tempat: satu font keluarga merapikan ritme antarmuka dan tetap jelas di layar HP.
 - Kenapa satu aksen: memudahkan mata menemukan tindakan utama di layar kecil.
 - Kenapa ikon Ratu: memberi nama dan wujud yang tidak generik, sesuai permintaan pengguna.
+- Kenapa Ratu bisa mengecilkan rel: navigasi sembilan peran perlu tetap kuat di desktop, tetapi area kerja perlu lebih lapang saat dipakai lama.
+- Kenapa alat lokal dipisahkan dari AI: sebagian besar pekerjaan tidak butuh jaringan, dan kunci API tidak aman bila disimpan di aplikasi.
 - Kenapa tidak ada animasi masuk: alat kerja dibuka berkali-kali, gerak berulang mengganggu.
 - Kenapa data di perangkat: laptop bisa mati dan jaringan bisa berbeda, jadi tidak ada server yang bisa dijadikan andalan.
-- Kenapa model opsional: sebagian besar alat tidak butuh jaringan, dan kunci API tidak aman bila dibundling.
 
 ## Pengujian
 
-Dijalankan di `http://localhost:4180` dengan Bun 1.3.14 dan Chromium bawaan aplikasi. Semua angka di bawah berasal dari pengukuran atau pengamatan langsung setelah perubahan ACE selesai.
+Dijalankan di `http://localhost:4180` dengan Bun 1.3.14 dan Chromium bawaan aplikasi. Angka di bawah berasal dari pengukuran atau pengamatan langsung setelah perubahan ACE selesai.
 
-### Pembuktian klik per modul
+### Pembuktian navigasi dan peran
 
-- Beranda: tambah fokus muncul di daftar, centang berubah ke keadaan selesai, hapus menghilangkan baris, catatan cepat tersimpan di `localStorage`, ide baru tersimpan dan bisa dihapus.
-- Studio Peran: klik pintasan mengganti peran ke Frontend Developer, langkah baru muncul, centang berfungsi, hapus berfungsi, catatan peran tersimpan, tombol Pakai membuka Prompt Lab dengan isi template.
-- Antislop: teks uji menghasilkan temuan Em dash, buzzword, CTA generik, angka tanpa konteks, dan emoji. Tombol versi bersih mengubah `revolutionary` menjadi `baru`, `effortless` menjadi `mudah`, merapikan tanda seru, dan menghapus emoji. Tombol Pakai sebagai draf mengganti isi textarea.
-- Prompt Lab: 24 prompt tampil, pencarian `kontras` menyisakan 2 hasil, filter Writer menyisakan 3 hasil, pengaturan model tersimpan, komposer menghasilkan prompt, prompt sendiri tersimpan lalu berhasil dihapus setelah perbaikan tombol Hapus.
-- Pengiriman model: endpoint `http://127.0.0.1:9/nope` sengaja dipakai. Status bar menampilkan `Gagal menghubungi model: Failed to fetch`, area jawaban kosong, tombol kembali aktif. Tidak ada permintaan sebelum tombol ditekan.
-- Content Planner: tujuh hari tampil, unggahan baru muncul, minggu berikutnya dan kembali ke hari ini berfungsi, centang dan hapus berfungsi.
-- Writer: bab baru tersimpan, perubahan status dan jumlah kata tercatat, target kata tersimpan, ringkasan menampilkan angka dari data yang diisi.
-- Aset & Warna: empat swatch awal, warna baru bertambah, kontras `#1F1E1B` di atas `#F5F4EE` dilaporkan AAA 15,13:1, potongan kode tersimpan dan dihapus, swatch bisa dihapus.
-- Data & Setelan: ekspor JSON menghasilkan `ace-data.json`, ekspor Markdown menghasilkan `ace-data.md`, impor JSON mengganti data dan menampilkan pesan sukses, tombol hapus meminta konfirmasi dua kali lalu mengosongkan data.
-- Dialog: tombol Kerja membuka dialog, tombol Tutup dan Escape menutupnya.
-- Tema: sakelar matahari dan bulan di header mengganti terang dan gelap, `aria-pressed` mengikuti tema aktif, nilai tersimpan di `ace-v2`. Tombol Terang dan Gelap di Data & Setelan juga mengubah header secara bersamaan.
-- Navigasi: delapan modul utama tampil tanpa pesan "Tampilan gagal". Judul halaman mengikuti modul yang dipilih.
+- Rel menampilkan sembilan peran dan tujuh alat pendukung. Navigasi bawah menampilkan lima tombol.
+- Kesembilan peran diklik satu per satu. Setiap peran menampilkan delapan kartu kapabilitas, judul halaman yang sesuai, konteks `peran / kapabilitas`, dan satu item navigasi aktif. Total 72 kapabilitas.
+- Tombol Ratu mengecilkan rel dari 252px menjadi 76px, mengubah label menjadi "Perbesar navigasi", menyimpan keadaan di `ace-v2`, lalu mengembalikannya saat diklik lagi. Saat ringkas, `aria-label` dipasang dan teks tersembunyi.
+- Di lebar 390px dan 768px, tombol Ratu membuka dialog. Dialog memuat 16 tombol, yakni sembilan peran dan tujuh alat, dan bisa ditutup.
+- Tidak ada tampilan gagal dibuat di semua modul yang dikunjungi.
+
+### Pembuktian alat kerja dan AI
+
+- Kapabilitas "UX design dan alur" dipilih. Bahan kerja diisi, tombol "Periksa lokal" menghasilkan temuan kondisi fokus dan dinonaktifkan yang belum ditulis.
+- Tombol "Susun prompt AI" menghasilkan prompt yang memuat fungsi kapabilitas dan bahan kerja milik pengguna.
+- Bahan kerja, hasil pemeriksaan, dan prompt tersimpan di `ace-v2` di bawah kunci kapabilitas `ux-flow`.
+- Jalur galat AI diuji dengan endpoint `http://127.0.0.1:9/v1/chat/completions`. Bilah status menampilkan `Gagal menghubungi AI: Failed to fetch`, area jawaban kosong, tombol kembali aktif, dan tidak ada pengecualian di konsol. Satu-satunya galat konsol berasal dari port yang sengaja diblokir browser.
+- Pengaturan model dikembalikan ke preset OpenCode setelah pengujian. Tidak ada kunci API yang diisi.
+
+### Pembuktian tampilan dan aksesibilitas
+
+- `document.fonts.check('15px Poppins')` bernilai `true`. Font terdeteksi Poppins di body.
+- Lighthouse: Accessibility 1,00, Best Practices 1,00, SEO 1,00, tanpa temuan gagal. Diuji pada tema gelap dengan rel penuh, tema gelap dengan rel ringkas, dan tema terang dengan rel penuh.
+- Temuan awal `label-content-name-mismatch` pada 16 tombol rel diperbaiki dengan memakai teks terlihat sebagai nama aksesibel saat rel penuh, dan `aria-label` hanya saat rel ringkas.
+- Tombol Ratu, dua tombol tema, dan tombol navigasi bawah masing-masing minimal 44x44px di lebar 390px. Tombol navigasi bawah 56px tingginya.
+- Iframe lebar 390px: overflow horizontal 0, rel tersembunyi, navigasi bawah tampil, workbench satu kolom, kartu kapabilitas 309px, dialog lebar 359px.
+- Iframe lebar 768px: overflow horizontal 0, rel tersembunyi, navigasi bawah tampil, dialog lebar 520px.
+- Layar 1294px: overflow horizontal 0, rel tampil, navigasi bawah tersembunyi.
+- Lighthouse tidak menjalankan tolok ukur performa atau emulasi perangkat.
 
 ### Pembuktian build dan pemuatan
 
-- `bun build js/app.js --target=browser`, `bun build sw.js --target=browser`, dan `bun build server.js --target=bun` lolos tanpa error.
-- Browser memuat ACE tanpa console error. `document.title` bernilai `ACE, Ruang Kerja Kreatif Portabel`, teks merek bernilai `ACE`.
-- `document.fonts.check('400 15px Poppins')` bernilai `true`. Font terdeteksi Poppins, berat judul 700, padding panel 26px, radius panel 12px, lebar area kerja maksimal 1180px, tinggi header 78px.
+- `bun build` lolos untuk `js/data.js`, `js/tools.js`, `js/analyzers.js`, `js/state.js`, `js/app.js`, `sw.js`, dan `server.js`.
+- Browser memuat ACE tanpa galat konsol saat kondisi normal.
+- Service worker terdaftar dengan scope `http://localhost:4180/`. Cache bernama `ace-v2-4` berisi 17 entri, termasuk `js/tools.js`, empat berkas Poppins, ikon SVG, ikon 192px, dan ikon 512px. Strategi cache adalah network-first dengan fallback cache.
+- `meta theme-color` mengikuti tema aktif. Tema tersimpan di `ace-v2`.
 - Satu-satunya kunci `localStorage` yang dipakai adalah `ace-v2`. Migrasi dari `antigravity-studio-v2` berhasil dalam pengujian sebelumnya.
-- Cache service worker bernama `ace-v2-2`. Ke-15 entri shell terverifikasi di cache, termasuk empat berkas Poppins, ikon SVG, ikon 192px, dan ikon 512px. Strategi cache adalah network-first dengan fallback cache.
-
-### Perbaikan yang ditemukan saat pengujian
-
-- Prompt buatan sendiri awalnya tidak punya tombol Hapus karena pengecekan ID memakai awalan `custom`. Sekarang pengecekan memakai daftar prompt sendiri.
-- Ekspor Markdown awalnya melempar `ReferenceError: c is not defined` karena `map` menerima dua argumen. Sekarang memakai `flatMap`.
-- Variabel tema gelap awalnya juga terpasang pada tombol yang membawa atribut `data-theme="night"`, sehingga tombol itu berlatar gelap dengan teks gelap. Sekarang selector dibatasi ke `:root[data-theme="night"]`.
-- Warna aksen untuk teks awalnya memakai aksen yang sama dengan garis dan latar, kontrasnya 3,79:1. Sekarang teks memakai `--accent-ink` dengan kontras 6,23:1 di atas aksen lembut.
-- Pola angka tanpa sumber awalnya gagal membaca bentuk `10K+ users`. Sekarang pola mencakup singkatan K, M, B, tanda persen, dan tanda tambah.
-- Tombol sakelar tema awalnya berukuran 40x38px dan 38x36px di layar kecil. Sekarang kedua tombol 44x44px di semua lebar, sesuai aturan target sentuh.
-- Nama, judul, manifest, dan berkas ekspor awalnya masih memakai Antigravity Studio. Sekarang semuanya memakai ACE. Kunci penyimpanan dan cache juga ikut diganti, dengan migrasi data lama.
-
-### Responsif dan aksesibilitas
-
-- Iframe lebar 390px: overflow 0, rel tersembunyi, navigasi bawah tampil, tombol terkecil 44px, kedua tombol tema 44x44px, font Poppins terdeteksi.
-- Iframe lebar 768px: overflow 0, rel tersembunyi, navigasi bawah tampil, tombol terkecil 44px, kedua tombol tema 44x44px, font Poppins terdeteksi.
-- Iframe lebar 1294px: overflow 0, rel tampil, navigasi bawah tersembunyi, tombol terkecil 44px, kedua tombol tema 44x44px, font Poppins terdeteksi.
-- Lighthouse tema terang setelah redesign: Accessibility 1,00, Best Practices 1,00, SEO 1,00, tanpa temuan gagal.
-- Lighthouse tema gelap setelah redesign: Accessibility 1,00, Best Practices 1,00, SEO 1,00, tanpa temuan gagal.
-- Alat Lighthouse yang dipakai mengaudit aksesibilitas, best practices, dan SEO. Audit tidak menjalankan tolok ukur performa atau emulasi perangkat.
-- Focus outline terlihat, dialog native bisa ditutup dengan Escape, semua kontrol memakai elemen dengan nama yang terbaca.
 
 ### Yang belum diuji
 
-- Pemasangan sungguhan di Chrome Android belum bisa dilakukan dari workspace ini karena tidak ada perangkat tersambung. Perlu dicoba setelah aplikasi dipublikasikan ke HTTPS.
-- Pemanggilan model sungguhan belum diuji karena tidak ada kunci API dan endpoint milik pengguna. Hanya jalur error yang diuji.
-- Berkas APK biner belum dihasilkan karena mesin ini tidak punya Java, Android SDK, dan Gradle. Yang ada adalah proyek dan skrip build di folder `android/`.
-- Publikasi ke host publik belum dilakukan karena host dan kredensial belum dipilih atau diberikan.
+- Pemasangan sungguhan di Chrome Android belum bisa dilakukan karena tidak ada perangkat tersambung. Perlu dicoba setelah aplikasi dipublikasikan ke HTTPS.
+- Pemanggilan model sungguhan belum diuji karena belum ada endpoint, token, atau kunci milik pengguna, termasuk server OpenCode yang aktif dan mengizinkan origin ACE.
+- Berkas APK biner belum dihasilkan karena masih menunggu host HTTPS aktif. Toolchain Node.js, JDK 17, dan Android SDK sudah tersedia.
+- Publikasi ke host publik belum dilakukan karena alamat repository GitHub dan akses Cloudflare belum diberikan.
 - Pengukuran Core Web Vitals lapangan tidak dilakukan karena tidak ada data pengguna nyata.
+- Tangkapan layar tidak diperiksa secara visual dalam sesi ini karena model tidak menerima masukan gambar. Pemeriksaan mengandalkan DOM, gaya komputasi, dan Lighthouse.
