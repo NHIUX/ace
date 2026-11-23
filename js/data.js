@@ -1,0 +1,192 @@
+export const ROLES = [
+  {
+    id: "ux",
+    label: "UI/UX Designer",
+    short: "UX",
+    summary: "Riset, alur, state, dan handoff.",
+    checks: [
+      "Tulis tujuan layar dalam satu kalimat",
+      "Daftarkan pengguna dan skenario utama",
+      "Petakan alur sebelum membuat visual",
+      "Sertakan state kosong, memuat, error, dan sukses",
+      "Cek kontras teks dan target sentuh",
+      "Tulis catatan handoff untuk frontend",
+    ],
+    outputs: ["User flow", "Wireframe", "State list", "Spesifikasi komponen"],
+    tools: ["contrast", "antislop", "prompt"],
+  },
+  {
+    id: "graphic",
+    label: "Graphic Designer",
+    short: "GFX",
+    summary: "Palet, komposisi, aset, dan konsistensi.",
+    checks: [
+      "Kumpulkan referensi nyata sebelum memilih arah",
+      "Tetapkan peran tiap warna dalam palet",
+      "Uji kontras pasangan warna",
+      "Samakan radius dan ketebalan garis",
+      "Siapkan aset dalam dua ukuran",
+      "Tandai placeholder bila aset belum final",
+    ],
+    outputs: ["Palet warna", "Daftar aset", "Spesifikasi ukuran", "Catatan komposisi"],
+    tools: ["contrast", "antislop", "prompt"],
+  },
+  {
+    id: "frontend",
+    label: "Frontend Developer",
+    short: "FE",
+    summary: "Markup, komponen, aksesibilitas, dan performa.",
+    checks: [
+      "Gunakan elemen semantik yang sesuai",
+      "Berikan nama pada tombol dan field",
+      "Pastikan fokus keyboard terlihat",
+      "Minimum target sentuh 44px",
+      "Uji empty, loading, dan error state",
+      "Hindari script pihak ketiga yang memblokir render",
+    ],
+    outputs: ["Snippet HTML/CSS", "Daftar komponen", "Checklist aksesibilitas"],
+    tools: ["contrast", "antislop", "prompt"],
+  },
+  {
+    id: "writer",
+    label: "Writer, Novel & Book",
+    short: "BOOK",
+    summary: "Premis, tokoh, bab, dan naskah.",
+    checks: [
+      "Tulis premis dalam satu kalimat",
+      "Tetapkan motif tokoh utama",
+      "Susun konflik sebelum adegan",
+      "Beri tujuan pada setiap bab",
+      "Baca ulang dialog dengan keras",
+      "Catat asumsi yang belum diputuskan",
+    ],
+    outputs: ["Sinopsis", "Bagan tokoh", "Outline bab", "Draf adegan"],
+    tools: ["antislop", "prompt"],
+  },
+  {
+    id: "copywriting",
+    label: "Copywriting",
+    short: "COPY",
+    summary: "Judul, subjudul, CTA, dan kalimat produk.",
+    checks: [
+      "Sebutkan manfaat konkret, bukan klaim umum",
+      "Hilangkan kata sifat tanpa bukti",
+      "Ganti CTA generik dengan tindakan spesifik",
+      "Cek panjang kalimat dan pengulangan",
+      "Pastikan angka punya sumber",
+      "Baca dengan suara keras sebelum dipakai",
+    ],
+    outputs: ["Judul", "Subjudul", "CTA", "Deskripsi singkat"],
+    tools: ["antislop", "prompt"],
+  },
+  {
+    id: "creator",
+    label: "Content Creator",
+    short: "CREATE",
+    summary: "Ide, skrip, caption, dan variasi format.",
+    checks: [
+      "Tentukan satu sudut pandang per konten",
+      "Tulis tiga alternatif judul",
+      "Sesuaikan panjang dengan kanal",
+      "Sertakan satu ajakan yang jelas",
+      "Hindari emoji dekoratif berlebih",
+      "Tandai klaim yang perlu bukti",
+    ],
+    outputs: ["Ide konten", "Skrip pendek", "Caption", "Variasi judul"],
+    tools: ["antislop", "prompt"],
+  },
+  {
+    id: "planner",
+    label: "Content Planner",
+    short: "PLAN",
+    summary: "Kalender, kanal, dan beban produksi.",
+    checks: [
+      "Tetapkan tujuan konten minggu ini",
+      "Batasi satu unggahan per hari",
+      "Seimbangkan kanal yang dipakai",
+      "Tulis kebutuhan aset di tiap jadwal",
+      "Sisakan ruang untuk konten mendadak",
+      "Tinjau hasil minggu lalu sebelum menambah",
+    ],
+    outputs: ["Kalender mingguan", "Daftar kebutuhan aset", "Catatan evaluasi"],
+    tools: ["prompt"],
+  },
+];
+
+export const TEMPLATES = [
+  { id: "p01", role: "ux", title: "User flow satu layar", text: "Bertindak sebagai UI/UX Designer. Rancang alur untuk: [fitur]. Keluarkan tujuan pengguna, langkah utama, state kosong, memuat, error, sukses, dan pertanyaan yang perlu dikonfirmasi. Gunakan Bahasa Indonesia. Jangan mengarang data pengguna." },
+  { id: "p02", role: "ux", title: "Audit aksesibilitas cepat", text: "Periksa deskripsi antarmuka ini: [deskripsi]. Temukan masalah fokus keyboard, nama kontrol, kontras, target sentuh, dan state yang hilang. Tulis temuan sebagai daftar prioritas dengan alasan satu baris." },
+  { id: "p03", role: "ux", title: "Spesifikasi komponen", text: "Buat spesifikasi komponen [nama] untuk layar [nama]. Sertakan anatomi, state, perilaku keyboard, teks bantuan, dan batas ukuran. Jangan menambah dekorasi tanpa fungsi." },
+  { id: "p04", role: "graphic", title: "Evaluasi palet", text: "Evaluasi palet [daftar hex]. Sebutkan peran tiap warna, hitung kontras terhadap latar dan permukaan, lalu beri perbaikan bila gagal AA. Pertahankan identitas warna bila sudah benar." },
+  { id: "p05", role: "graphic", title: "Arah visual tanpa slop", text: "Usulkan tiga arah visual untuk [produk]. Untuk tiap arah, tulis palet 2 warna inti plus 1 aksen, alasan tipografi, satu motif, dan hal yang sengaja tidak dipakai. Hindari gradien ungu biru, glow, glassmorphism berlebih, dan emoji." },
+  { id: "p06", role: "graphic", title: "Daftar aset", text: "Susun daftar aset untuk [kebutuhan]. Kolom: nama, ukuran, format, prioritas, dan status placeholder. Tandai aset yang belum boleh dianggap final." },
+  { id: "p07", role: "frontend", title: "HTML CSS semantik", text: "Ubah deskripsi ini menjadi HTML dan CSS tanpa framework: [deskripsi]. Fokus keyboard terlihat, target sentuh minimal 44px, tidak ada link palsu. Jelaskan satu baris alasan setiap keputusan warna atau radius." },
+  { id: "p08", role: "frontend", title: "Perbaikan performa", text: "Tinjau cuplikan kode ini: [kode]. Temukan render blocking, media tanpa ukuran, dan animasi berulang tanpa purpose. Berikan perbaikan langsung pada kode, bukan saran umum." },
+  { id: "p09", role: "frontend", title: "State lengkap", text: "Untuk komponen [nama], tulis tampilan dan teks untuk state kosong, memuat, error, dan sukses. Tiap state harus menyebut penyebab dan tindakan berikutnya." },
+  { id: "p10", role: "writer", title: "Kembangkan adegan", text: "Bertindak sebagai penulis novel. Kembangkan adegan dengan premis: [premis]. Keluarkan tujuan adegan, konflik, tiga dialog alami, kalimat pembuka dan penutup alternatif. Tandai asumsi tokoh yang belum ditetapkan." },
+  { id: "p11", role: "writer", title: "Bagan tokoh", text: "Buat bagan tokoh untuk cerita [judul]. Isi nama, motif, ketakutan, hubungan, dan perubahan yang diharapkan. Jangan mengisi dengan nama acak bila belum ada keputusan pemilik." },
+  { id: "p12", role: "writer", title: "Outline bab", text: "Susun outline 8 bab untuk premis [premis]. Tiap bab punya tujuan, konflik, dan akhir adegan. Jangan menulis prosa penuh." },
+  { id: "p13", role: "copywriting", title: "Judul tanpa buzzword", text: "Buat 10 alternatif judul untuk [produk atau fitur]. Hindari Revolutionary, Seamless, Next Generation, Powerful, Effortless, dan kata sifat tanpa bukti. Tiap judul maksimal 12 kata." },
+  { id: "p14", role: "copywriting", title: "CTA spesifik", text: "Ganti CTA generik berikut: [CTA]. Berikan 8 alternatif yang menyebut tindakan nyata. Jangan memakai Get Started, Learn More, Explore, atau Discover." },
+  { id: "p15", role: "copywriting", title: "Deskripsi produk jujur", text: "Tulis deskripsi 80 kata untuk [produk]. Sebutkan apa yang bisa dilakukan, batasannya, dan untuk siapa. Jangan memakai statistik atau testimoni tanpa sumber." },
+  { id: "p16", role: "creator", title: "Lima ide konten", text: "Buat 5 ide konten untuk topik [topik] dalam format [format]. Tiap ide berisi sudut pandang, judul, tiga poin, dan satu ajakan spesifik. Hindari jargon pemasaran." },
+  { id: "p17", role: "creator", title: "Skrip 60 detik", text: "Tulis skrip 60 detik untuk [topik]. Struktur: pembuka 5 detik, tiga poin utama, penutup dengan satu ajakan. Tulis dalam bahasa percakapan, bukan bahasa iklan." },
+  { id: "p18", role: "creator", title: "Caption dan variasi", text: "Buat caption untuk [topik] dengan tiga nada: tenang, tajam, dan ramah. Sertakan tiga tag yang relevan. Jangan menambah emoji dekoratif." },
+  { id: "p19", role: "planner", title: "Kalender tujuh hari", text: "Susun kalender 7 hari untuk [tujuan]. Kanal: [daftar kanal]. Maksimal satu unggahan per hari. Tulis alasan penempatan hari dan aset yang perlu disiapkan. Jangan mengisi tanggal palsu." },
+  { id: "p20", role: "planner", title: "Evaluasi mingguan", text: "Buat kerangka evaluasi konten mingguan. Fokus pada pertanyaan yang bisa dijawab dengan data yang benar-benar kamu punya. Jangan menyarankan metrik yang tidak tersedia." },
+  { id: "p21", role: "ux", title: "Bersihkan microcopy", text: "Perbaiki microcopy berikut agar pendek dan jelas: [teks]. Hapus buzzword, emoji, dan kalimat bertele-tele. Berikan versi sebelum dan sesudah." },
+  { id: "p22", role: "copywriting", title: "Antislop pass", text: "Periksa teks ini: [teks]. Temukan em dash, buzzword, CTA generik, angka tanpa sumber, emoji dekoratif, dan kalimat panjang. Tulis versi bersih tanpa mengubah makna." },
+  { id: "p23", role: "frontend", title: "Checklist handoff", text: "Buat checklist handoff dari desain ke kode untuk [komponen]. Sertakan state, ukuran, warna, tipografi, fokus keyboard, dan hal yang masih perlu keputusan." },
+  { id: "p24", role: "planner", title: "Keseimbangan kanal", text: "Dengan jadwal [tempel jadwal], evaluasi keseimbangan kanal dan beban produksi. Berikan saran penyesuaian tanpa menambah jumlah unggahan." },
+];
+
+export const MODEL_PRESETS = [
+  { id: "openai", label: "OpenAI compatible", endpoint: "https://api.openai.com/v1/chat/completions", model: "gpt-4o-mini", format: "openai" },
+  { id: "gemini", label: "Google Gemini", endpoint: "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent", model: "gemini-2.0-flash", format: "gemini" },
+  { id: "anthropic", label: "Anthropic compatible", endpoint: "https://api.anthropic.com/v1/messages", model: "claude-3-5-haiku-latest", format: "anthropic" },
+  { id: "custom", label: "Endpoint sendiri", endpoint: "", model: "", format: "openai" },
+];
+
+export const SLOP_PATTERNS = {
+  emDash: { label: "Em dash", severity: "tinggi", hint: "Ganti dengan koma, titik, atau kurung." },
+  buzzwords: { label: "Buzzword AI marketing", severity: "tinggi", hint: "Ganti dengan manfaat konkret." },
+  genericCta: { label: "CTA generik", severity: "tinggi", hint: "Sebut tindakan spesifik." },
+  fakeStats: { label: "Angka tanpa konteks", severity: "tinggi", hint: "Sertakan sumber atau hapus angka." },
+  emoji: { label: "Emoji dekoratif", severity: "sedang", hint: "Hapus bila tidak menyampaikan informasi." },
+  filler: { label: "Kata isian AI", severity: "sedang", hint: "Hapus atau tulis ulang kalimatnya." },
+  exclamation: { label: "Tanda seru berulang", severity: "rendah", hint: "Satu tanda seru sudah cukup." },
+  longSentence: { label: "Kalimat terlalu panjang", severity: "sedang", hint: "Pecah menjadi dua kalimat." },
+};
+
+export const BUZZWORDS = [
+  "ai powered", "next generation", "revolutionary", "seamless", "cutting edge",
+  "intelligent", "ultimate", "powerful", "effortless", "game changer",
+  "unlock", "elevate", "leverage", "streamline", "robust", "innovative",
+  "revolutioner", "mutakhir", "unggul", "terbaik di kelasnya",
+];
+
+export const GENERIC_CTA = [
+  "get started", "learn more", "try now", "explore", "discover", "click here",
+  "mulai sekarang", "pelajari lebih lanjut", "coba sekarang", "jelajahi",
+];
+
+export const FILLER = [
+  "as an ai", "i hope this helps", "in today's fast-paced", "delve", "tapestry",
+  "testament to", "in the realm of", "navigate the landscape", "it is important to note",
+];
+
+export const BUZZWORD_REPLACEMENTS = {
+  "revolutionary": "baru",
+  "seamless": "mulus",
+  "cutting edge": "terkini",
+  "powerful": "kuat",
+  "effortless": "mudah",
+  "next generation": "generasi berikutnya",
+  "ai powered": "menggunakan AI",
+  "ultimate": "utama",
+  "intelligent": "cerdas",
+  "game changer": "perubahan besar",
+  "revolutioner": "baru",
+  "unggul": "lebih baik",
+  "terbaik di kelasnya": "unggul di kategorinya",
+};

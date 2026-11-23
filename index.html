@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="id" data-theme="paper">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <meta name="description" content="ACE, ruang kerja kreatif offline untuk UI/UX, grafis, frontend, copywriting, konten, perencanaan, dan menulis.">
+    <title>ACE, Ruang Kerja Kreatif Portabel</title>
+    <link rel="manifest" href="./manifest.webmanifest">
+    <meta name="theme-color" content="#f5f4ee">
+    <link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
+    <link rel="preload" href="./fonts/poppins-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="./fonts/poppins-600.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="./styles.css">
+    <script type="module" src="./js/app.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Lewati navigasi</a>
+
+    <div class="shell">
+      <header class="topbar">
+        <div class="brand">
+          <svg class="queen-mark" viewBox="0 0 512 512" aria-hidden="true" focusable="false">
+            <rect width="512" height="512" rx="112" fill="#F6E8E0"/>
+            <g fill="#B85C38">
+              <path d="M156 180 L190 228 L214 146 L256 212 L298 146 L322 228 L356 180 L338 264 L174 264 Z"/>
+              <circle cx="156" cy="180" r="9"/><circle cx="214" cy="146" r="9"/>
+              <circle cx="298" cy="146" r="9"/><circle cx="356" cy="180" r="9"/>
+              <path d="M212 264 H300 L284 352 H228 Z"/>
+              <rect x="180" y="352" width="152" height="24" rx="8"/>
+            </g>
+            <rect x="160" y="376" width="192" height="28" rx="10" fill="#8A3F22"/>
+          </svg>
+          <div class="brand-text">
+            <strong>ACE</strong>
+            <span>Ruang kerja kreatif portabel</span>
+          </div>
+        </div>
+        <div class="top-actions">
+          <div class="theme-switch" role="group" aria-label="Pilih tampilan">
+            <button class="theme-option" type="button" data-action="theme" data-theme="paper" aria-label="Pakai tema terang, simbol matahari" aria-pressed="true">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></svg>
+            </button>
+            <button class="theme-option" type="button" data-action="theme" data-theme="night" aria-label="Pakai tema gelap, simbol bulan" aria-pressed="false">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.4A8.4 8.4 0 0 1 9.6 4a8.4 8.4 0 1 0 10.4 10.4Z"/></svg>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <nav id="rail" class="rail" aria-label="Modul kerja"></nav>
+
+      <main id="main">
+        <div id="statusbar" class="statusbar" role="status" hidden></div>
+        <header class="page-head">
+          <h1 id="pageTitle">Beranda</h1>
+          <p>Ruang kerja kreatif yang ikut ke mana pun kamu pergi.</p>
+        </header>
+        <div id="view" class="view" aria-live="polite">
+          <div class="panel">Memuat ruang kerja.</div>
+        </div>
+      </main>
+    </div>
+
+    <nav id="bottomNav" class="bottom" aria-label="Navigasi layar sempit"></nav>
+
+    <dialog id="workDialog" aria-labelledby="workDialogTitle">
+      <div class="dialog-head">
+        <h2 id="workDialogTitle">Pilih ruang kerja</h2>
+        <button class="btn" type="button" data-action="close-dialog" aria-label="Tutup daftar ruang kerja">Tutup</button>
+      </div>
+      <p class="muted small">Tujuh peran dan tiga alat tambahan tersedia di sini.</p>
+      <div id="workDialogList" class="dialog-list"></div>
+    </dialog>
+  </body>
+</html>

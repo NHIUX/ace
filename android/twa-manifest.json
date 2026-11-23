@@ -1,0 +1,23 @@
+{
+  "packageName": "com.nurhafit.ace",
+  "host": "REPLACE_WITH_YOUR_HTTPS_HOST",
+  "name": "ACE",
+  "launcherName": "ACE",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "themeColor": "#F5F4EE",
+  "themeColorDark": "#191817",
+  "navigationColor": "#F5F4EE",
+  "navigationColorDark": "#191817",
+  "navigationDividerColor": "#E3DED3",
+  "navigationDividerColorDark": "#3A3733",
+  "backgroundColor": "#F5F4EE",
+  "enableNotifications": false,
+  "startUrl": "/",
+  "iconUrl": "https://REPLACE_WITH_YOUR_HTTPS_HOST/icons/icon-512.png",
+  "appVersion": 1,
+  "signingKey": {
+    "path": "./android.keystore",
+    "alias": "android"
+  }
+}
