@@ -2,7 +2,7 @@
 
 Folder ini bukan APK jadi. Isinya adalah konfigurasi dan skrip untuk menghasilkan APK dari PWA setelah aplikasi dipublikasikan ke alamat HTTPS.
 
-Saya tidak bisa menghasilkan berkas `.apk` di workspace ini karena mesin ini tidak memasang Java, Android SDK, atau Gradle. Jadi jangan mengira `twa-manifest.json` atau `build-apk.bat` adalah aplikasi yang bisa langsung dikirim ke HP.
+Mesin ini awalnya tidak punya Java, Node.js, atau Android SDK. Toolchain sedang saya siapkan sesuai pilihanmu untuk membuat APK biner. Sampai build benar-benar dijalankan dan menghasilkan berkas, jangan mengira `twa-manifest.json` atau `build-apk.bat` adalah aplikasi yang bisa langsung dikirim ke HP.
 
 ## Cara paling mudah tanpa APK
 
@@ -18,12 +18,12 @@ Hasilnya tampil seperti aplikasi biasa dan bisa dipakai offline. Ini tidak butuh
 
 APK berguna kalau kamu ingin berkas yang bisa dibagikan langsung atau dipasang tanpa lewat menu browser.
 
-Yang perlu dipasang di Windows:
+Yang perlu ada di Windows:
 
-1. JDK 17. Setelah dipasang, atur variabel `JAVA_HOME` ke folder JDK.
-2. Android SDK Command Line Tools. Setelah dipasang, atur `ANDROID_HOME` ke folder SDK.
+1. JDK 17. Skrip `build-apk.bat` mencari JDK di `%ProgramFiles%\ojdkbuild`, `%ProgramFiles%\Java`, dan `%ProgramFiles%\Eclipse Adoptium`. Variabel `JAVA_HOME` boleh diisi manual kalau lokasinya berbeda.
+2. Android SDK Command Line Tools di `%LOCALAPPDATA%\Android\Sdk`. Skrip memakai lokasi itu bila `ANDROID_HOME` tidak diisi.
 3. Node.js 20 atau lebih baru, karena skrip memakai `npx`.
-4. Android SDK Platform 35 dan build-tools yang sesuai. Ini bisa dipasang lewat `sdkmanager`.
+4. Platform Android 35, build-tools 35.0.0, dan platform-tools. Skrip akan memasangnya otomatis lewat `sdkmanager` bila belum ada.
 
 Lalu:
 

@@ -19,11 +19,11 @@ Versi ini berbeda dari `output/antigravity-desk/`. Versi lama memakai server Bun
 
 Semua alat di atas berjalan lokal di browser. Tidak ada akun, tidak ada pengiriman otomatis, tidak ada data bawaan yang dikarang.
 
-## Rekomendasi publikasi gratis
+## Publikasi gratis
 
-Pilihan terbaik: **Cloudflare Pages yang terhubung ke repository GitHub**.
+Kamu sudah memilih **Cloudflare Pages yang terhubung ke repository GitHub**. Panduan lengkap ada di `CLOUDFLARE.md`.
 
-Alasannya:
+Alasan pilihan ini:
 
 - Gratis untuk penggunaan pribadi.
 - HTTPS otomatis, syarat wajib agar PWA bisa dipasang di Android.
@@ -31,19 +31,14 @@ Alasannya:
 - Bisa memakai repository publik kalau mau benar-benar open source, atau privat kalau mau tetap sendiri.
 - Bisa memakai domain sendiri nanti.
 
-Cara deploy:
+Repository Git lokal sudah disiapkan di folder ini dengan satu commit awal. Yang masih perlu kamu berikan adalah alamat repository GitHub dan akses akun Cloudflare. Setelah itu deploy bisa dilanjutkan.
 
-1. Buat repository GitHub, lalu unggah isi folder ini.
-2. Di Cloudflare Pages, buat project baru dan hubungkan repository itu.
-3. Build command dikosongkan. Output directory diisi `.` atau folder tempat `index.html` berada.
-4. Setelah selesai, salin alamat `https://...pages.dev`.
+Alternatif yang tetap tersedia kalau nanti berubah pikiran:
 
-Alternatif:
-
-- **GitHub Pages**: paling sederhana dan cocok untuk repo publik. Alamatnya `https://<user>.github.io/<repo>/`. Kekurangannya, repo gratis harus publik.
+- **GitHub Pages**: paling sederhana dan cocok untuk repo publik. Kekurangannya, repo gratis harus publik.
 - **Netlify**: juga gratis dan mudah, cocok kalau kamu lebih nyaman memakai drag and drop.
 
-Saya belum mempublikasikan apa pun karena belum ada alamat hosting dan kredensial dari kamu.
+Saya belum mempublikasikan apa pun karena belum ada alamat repository dan kredensial dari kamu.
 
 ## Bisa menghasilkan uang?
 
