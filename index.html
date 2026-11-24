@@ -39,9 +39,13 @@
           </div>
         </div>
 
-        <p id="contextLabel" class="context-label" aria-live="polite">Beranda</p>
+        <p id="contextLabel" class="context-label" aria-live="polite">UI/UX Designer / Riset pengguna</p>
 
         <div class="top-actions">
+          <button class="ai-toggle" type="button" data-action="ai-toggle" aria-label="Buka pengaturan AI" aria-haspopup="dialog" aria-controls="aiDialog" title="Pengaturan AI">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 4h14v12H9l-4 4z"/><path d="M9 9h6M9 12h4"/></svg>
+            <span>AI</span>
+          </button>
           <span class="theme-caption">Tampilan</span>
           <div class="theme-switch" role="group" aria-label="Pilih tampilan">
             <button class="theme-option" type="button" data-action="theme" data-theme="paper" aria-label="Pakai tema terang, simbol matahari" aria-pressed="true" title="Tema terang">
@@ -59,8 +63,8 @@
       <main id="main">
         <div id="statusbar" class="statusbar" role="status" hidden></div>
         <header class="page-head">
-          <h1 id="pageTitle">Beranda</h1>
-          <p id="pageSubtitle">Ruang kerja kreatif yang ikut ke mana pun kamu pergi.</p>
+          <h1 id="pageTitle">UI/UX Designer</h1>
+          <p id="pageSubtitle">Riset pengguna. Susun pertanyaan dan rencana riset yang tidak mengarahkan jawaban.</p>
         </header>
         <div id="view" class="view" aria-live="polite">
           <div class="panel">Memuat ruang kerja.</div>
@@ -74,11 +78,15 @@
       <div class="dialog-head">
         <div>
           <h2 id="workDialogTitle">Pilih bidang kerja</h2>
-          <p class="muted small">Sembilan peran dan tujuh alat pendukung tersedia di sini.</p>
+          <p class="muted small">Sembilan bidang kerja tersedia di sini.</p>
         </div>
         <button class="btn" type="button" data-action="close-dialog" aria-label="Tutup daftar bidang kerja">Tutup</button>
       </div>
-      <div id="workDialogList" class="dialog-list"></div>
+      <div id="workDialogList" class="dialog-list work-choices"></div>
+    </dialog>
+
+    <dialog id="aiDialog" aria-labelledby="aiDialogTitle">
+      <div id="aiDialogBody"></div>
     </dialog>
   </body>
 </html>

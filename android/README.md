@@ -1,48 +1,78 @@
-# Pembuat APK ACE
+# APK ACE
 
-Folder ini bukan APK jadi. Isinya adalah konfigurasi dan skrip untuk menghasilkan APK dari PWA setelah aplikasi dipublikasikan ke alamat HTTPS.
+Folder ini berisi dua jalur APK. Jalur utama menghasilkan APK offline dari aset ACE yang dibungkus WebView. Jalur lama memakai Bubblewrap TWA dan masih menunggu host HTTPS aktif.
 
-Toolchain sudah disiapkan: Node.js 26.13.1, JDK 17.0.3, dan Android SDK command line tools di `%LOCALAPPDATA%\Android\Sdk\cmdline-tools\latest`. Build biner belum dijalankan karena masih menunggu host HTTPS aktif. Sampai build benar-benar menghasilkan berkas, jangan mengira `twa-manifest.json` atau `build-apk.bat` adalah aplikasi yang bisa langsung dikirim ke HP.
+## Jalur utama: APK offline
 
-## Cara paling mudah tanpa APK
+Berkas jadi ada di `offline/ACE-offline.apk`.
 
-Kalau tujuanmu hanya memakai ACE di HP sendiri, lebih praktis memakai install PWA bawaan Chrome:
+Fakta hasil build:
 
-1. Publikasikan folder utama ACE ke host HTTPS.
-2. Buka alamat itu di Chrome Android.
-3. Menu Chrome, pilih Add to Home screen atau Install app.
+- Nama paket: `com.nhiux.ace`
+- Ukuran: 133042 byte
+- SHA-256: `F4CC3CF4129BB769A55222C37D162D6B1E6E8DD6D89E72836348362BC04D0241`
+- MinSdk: 24
+- TargetSdk: 36
+- Tanda tangan: APK Signature Scheme v2 dan v3, terverifikasi dengan `apksigner verify`
+- Isi: `index.html`, `styles.css`, `js/`, `fonts/`, `icons/`, `manifest.webmanifest`, `sw.js`, dan `classes.dex`
 
-Hasilnya tampil seperti aplikasi biasa dan bisa dipakai tanpa internet setelah cache terisi. Ini tidak butuh JDK, SDK, atau Play Store.
+APK ini tidak memerlukan host HTTPS, Play Store, atau `assetlinks.json`. Aset ACE disalin ke dalam APK dan disajikan ke WebView pada origin `https://appassets.androidplatform.net`. Alat lokal, Poppins, dan ikon tersedia tanpa jaringan. Pengiriman ke model tetap terjadi hanya saat tombol kirim ditekan.
 
-## Cara menghasilkan APK
+### Cara build ulang
 
-APK berguna kalau kamu ingin berkas yang bisa dibagikan langsung atau dipasang tanpa lewat menu browser.
+Dari folder `output/antigravity-studio`:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\android\offline\build-offline-apk.ps1
+```
+
+Skrip mencari JDK 17, SDK Android, build-tools 35.0.0 atau 36.1.0, dan platform android-36 atau android-35. Skrip menyalin aset, mengompilasi sumber daya, mengompilasi `MainActivity.java`, membuat `classes.dex`, memasukkan aset dengan jalur garis miring maju, menyelaraskan APK, lalu menandatanganinya.
+
+Kunci tanda tangan dibuat sekali di `offline/ace-offline.keystore` dengan alias `androiddebugkey`. Berkas itu sengaja tidak dimasukkan repository karena repo ini publik. Simpan salinannya di tempat aman kalau kamu mau memperbarui APK dengan nama paket dan tanda tangan yang sama. Kunci ini untuk pemakaian lokal, bukan untuk Play Store.
+
+### Struktur jalur offline
+
+```text
+android/offline/
+  ACE-offline.apk
+  ace-offline.keystore
+  AndroidManifest.xml
+  build-offline-apk.ps1
+  src/com/nhiux/ace/MainActivity.java
+  res/
+  assets/
+  build/
+```
+
+Folder `assets/` dan `build/` dihasilkan skrip dan boleh dihapus. Skrip akan membuatnya lagi.
+
+## Jalur lama: TWA dengan host HTTPS
+
+Folder `android/build-apk.bat` dan `android/twa-manifest.json` dipakai untuk Trusted Web Activity. Jalur ini belum dijalankan karena `twa-manifest.json` masih memakai `REPLACE_WITH_YOUR_HTTPS_HOST` dan belum ada host HTTPS aktif.
 
 Yang perlu ada di Windows:
 
-1. JDK 17. Skrip `build-apk.bat` mencari JDK di `%ProgramFiles%\ojdkbuild`, `%ProgramFiles%\Java`, dan `%ProgramFiles%\Eclipse Adoptium`. Variabel `JAVA_HOME` boleh diisi manual kalau lokasinya berbeda.
-2. Android SDK Command Line Tools di `%LOCALAPPDATA%\Android\Sdk`. Skrip memakai lokasi itu bila `ANDROID_HOME` tidak diisi.
+1. JDK 17. Skrip mencari JDK di `%ProgramFiles%\ojdkbuild`, `%ProgramFiles%\Java`, dan `%ProgramFiles%\Eclipse Adoptium`.
+2. Android SDK Command Line Tools di `%LOCALAPPDATA%\Android\Sdk`.
 3. Node.js 20 atau lebih baru, karena skrip memakai `npx`.
-4. Platform Android 35, build-tools 35.0.0, dan platform-tools. Skrip akan memasangnya otomatis lewat `sdkmanager` bila belum ada.
+4. Platform Android, build-tools, dan platform-tools. Skrip akan memasangnya bila belum ada.
 
 Lalu:
 
 1. Publikasikan folder utama ACE ke HTTPS dan pastikan `manifest.webmanifest` bisa dibuka.
 2. Buka Command Prompt di folder `android`.
 3. Jalankan `build-apk.bat`.
-4. Masukkan host HTTPS tanpa `https://`, misalnya `ace.pages.dev`.
-5. Skrip akan membuat proyek Trusted Web Activity, lalu menyusun APK.
+4. Masukkan host HTTPS tanpa `https://`.
+5. Skrip membuat proyek Trusted Web Activity, lalu menyusun APK.
 
-Berkas APK ada di `app\build\outputs\apk\release\`.
+Bubblewrap akan mencetak sidik jari sertifikat `SHA-256`. Salin ke `assetlinks-template.json`, lalu simpan sebagai `.well-known/assetlinks.json` di akar situs dan deploy ulang. Panduan lengkap ada di `../CLOUDFLARE.md`.
 
-## Tanda tangan aplikasi
+## Cara paling mudah tanpa APK
 
-Bubblewrap akan membuat kunci tanda tangan saat inisialisasi. Simpan berkas `.keystore` dan kata sandinya. Kalau kunci hilang, kamu tidak bisa memperbarui APK dengan nama paket yang sama.
+Kalau tujuanmu hanya memakai ACE di HP sendiri, PWA bawaan Chrome lebih praktis:
 
-`com.nurhafit.ace` adalah nama paket contoh. Kalau mau menggantinya, ubah `packageName` di `twa-manifest.json` sebelum build, lalu sesuaikan juga saat inisialisasi.
+1. Publikasikan folder utama ACE ke host HTTPS.
+2. Buka alamat itu di Chrome Android.
+3. Menu Chrome, pilih Add to Home screen atau Install app.
 
-Setelah build pertama, salin sidik jari sertifikat dari keluaran Bubblewrap ke `assetlinks-template.json`. Simpan hasilnya sebagai `.well-known/assetlinks.json` di akar situs dan deploy ulang. Panduan lengkap ada di `../CLOUDFLARE.md`.
-
-## Isi twa-manifest.json
-
-Berkas ini dipakai sebagai rujukan nilai warna, nama, dan identitas aplikasi. Nilai `REPLACE_WITH_YOUR_HTTPS_HOST` sengaja dibiarkan karena saya tidak mengarang alamat hosting. Isi dengan alamat aslimu setelah deploy.
+Hasilnya tampil seperti aplikasi biasa dan bisa dipakai tanpa internet setelah cache terisi.

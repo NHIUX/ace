@@ -1,6 +1,6 @@
 const ATURAN_AI = "Gunakan Bahasa Indonesia. Jangan mengarang data, angka, testimoni, tautan, atau sumber. Pisahkan fakta dari asumsi. Tandai bagian yang perlu dikonfirmasi.";
 
-const c = (id, label, summary, tool, instruction, placeholder, output) => ({
+const c = (id, label, summary, tool, instruction, placeholder, output, icon) => ({
   id,
   label,
   summary,
@@ -8,6 +8,7 @@ const c = (id, label, summary, tool, instruction, placeholder, output) => ({
   instruction,
   placeholder,
   output,
+  icon,
 });
 
 function susunPrompt(peran, kapabilitas) {
@@ -50,6 +51,7 @@ export const ICONS = {
   calendar: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
   clipboard: '<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V2h6v2M9 10h6M9 14h6"/>',
   shield: '<path d="M12 3 4 6v6c0 5 3.4 8.5 8 9 4.6-.5 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/>',
+  trash: '<path d="M4 7h16M9 7V4h6v3M6 7l1 14h10l1-14"/><path d="M10 11v6M14 11v6"/>',
 };
 
 export const ROLES = [
@@ -287,16 +289,6 @@ export const ROLES = [
       c("antislop-admin", "Antislop admin", "Rapikan notulen dan memo dari kalimat bertele-tele.", "slop", "Periksa teks administrasi ini. Temukan kata jargon, kalimat panjang, dan pernyataan tanpa pemilik atau tenggat. Tulis versi ringkas.", "Notulen atau memo", "Teks administrasi yang lebih jelas", "slop"),
     ],
   },
-];
-
-export const UTILITIES = [
-  { id: "home", label: "Beranda", icon: "home", hint: "Fokus dan pintasan" },
-  { id: "planner", label: "Content Planner", icon: "planner", hint: "Kalender mingguan" },
-  { id: "writer", label: "Writer", icon: "writer", hint: "Bab dan naskah" },
-  { id: "assets", label: "Aset & Warna", icon: "graphic", hint: "Palet dan potongan kode" },
-  { id: "antislop", label: "Antislop", icon: "slop", hint: "Pemeriksaan teks" },
-  { id: "prompt", label: "AI & Prompt", icon: "prompt", hint: "Model dan pustaka prompt" },
-  { id: "data", label: "Data & Setelan", icon: "data", hint: "Cadangan dan informasi" },
 ];
 
 export const TEMPLATES = ROLES.flatMap((role) => role.capabilities.map((cap) => ({
